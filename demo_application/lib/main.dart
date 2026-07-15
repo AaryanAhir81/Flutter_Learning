@@ -1,27 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:demo_application/stopwatch/stopwatch.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const stopwatchRUn());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class stopwatchRUn extends StatelessWidget {
+  const stopwatchRUn({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Flutter App',
-            style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
-          ),
-          backgroundColor: Color.fromARGB(255, 33, 191, 243),
-          leading: const Icon(Icons.menu),
-        ),
-        body: const Center(child: Text('Hello World! How are you')),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: StopwatchExample(),
     );
   }
 }

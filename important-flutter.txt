@@ -1,0 +1,9 @@
+column-vertical-main_axis
+row-horizontal-main_axiss
+
+column-horizontal-cross_axis
+row-vertical-cross_axis
+
+widget-means a you show on flutter app screen like row,column,textbox etc
+
+rendering-when ever your writing a code and run on mobile that process is called rendering
