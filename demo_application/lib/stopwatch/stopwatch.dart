@@ -1,127 +1,185 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
 
 class StopwatchExample extends StatefulWidget {
   const StopwatchExample({super.key});
 
   @override
-  State<StopwatchExample> createState() => _StopWatchExampleState();
+  State<StopwatchExample> createState() => _StopwatchExampleState();
 }
 
-class _StopWatchExampleState extends State<StopwatchExample> {
+class _StopwatchExampleState extends State<StopwatchExample> {
   int seconds = 0;
-  late Timer timer;
+  Timer? timer;
   bool isRunning = false;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  final List<int> laps = [];
 
   void _onTick(Timer timer) {
     setState(() {
-      if (isRunning) {
-        seconds++;
-      }
+      seconds++;
     });
   }
 
   void _startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), _onTick);
+    timer?.cancel();
+
     setState(() {
       seconds = 0;
+      laps.clear();
       isRunning = true;
     });
-  }
 
-  void _stopTimer() {
-    timer.cancel();
-    setState(() {
-      isRunning = false;
-    });
+    timer = Timer.periodic(const Duration(seconds: 1), _onTick);
   }
 
   void _pauseTimer() {
+    timer?.cancel();
+
     setState(() {
       isRunning = false;
     });
   }
 
   void _resumeTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), _onTick);
+
     setState(() {
       isRunning = true;
     });
   }
 
-  String _secondToText() => seconds == 1 ? '1 second' : '$seconds seconds';
+  void _stopTimer() {
+    timer?.cancel();
+
+    setState(() {
+      isRunning = false;
+      seconds = 0;
+    });
+  }
+
+  void _lap() {
+    setState(() {
+      laps.add(seconds);
+    });
+  }
+
+  void _clear() {
+    setState(() {
+      laps.clear();
+      seconds = 0;
+    });
+  }
+
+  String _secondToText() {
+    return seconds == 1 ? "1 second" : "$seconds seconds";
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title:const Text('Stopwatch Example')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(_secondToText(), style: const TextStyle(fontSize: 30)),
-          ),
-          const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: isRunning ? null : _startTimer,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.green,
+      appBar: AppBar(title: const Text("Stopwatch Example"), centerTitle: true),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+
+            Text(
+              _secondToText(),
+              style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 30),
+
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              alignment: WrapAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: isRunning ? null : _startTimer,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
                   ),
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                    Colors.white,
-                  ),
+                  child: const Text("Start"),
                 ),
-                child: const Text('Start'),
-              ),
-              ElevatedButton(
-                onPressed: isRunning ? _pauseTimer : null,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.orange,
+
+                ElevatedButton(
+                  onPressed: isRunning ? _pauseTimer : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                    foregroundColor: Colors.white,
                   ),
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                    Colors.white,
-                  ),
+                  child: const Text("Pause"),
                 ),
-                child: const Text('Pause'),
-              ),
-              ElevatedButton(
-                onPressed: isRunning ? null : _resumeTimer,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Colors.blue,
+
+                ElevatedButton(
+                  onPressed: !isRunning && seconds > 0 ? _resumeTimer : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
                   ),
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                    Colors.white,
-                  ),
+                  child: const Text("Resume"),
                 ),
-                child: const Text('Resume'),
-              ),
-              ElevatedButton(
-                onPressed: isRunning ? _stopTimer : null,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                    Colors.white,
+
+                ElevatedButton(
+                  onPressed: seconds > 0 ? _stopTimer : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
                   ),
+                  child: const Text("Stop"),
                 ),
-                child: const Text('Stop'),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+
+            const SizedBox(height: 20),
+
+            Wrap(
+              spacing: 10,
+              children: [
+                ElevatedButton(
+                  onPressed: isRunning ? _lap : null,
+                  child: const Text("Lap"),
+                ),
+                ElevatedButton(onPressed: _clear, child: const Text("Clear")),
+              ],
+            ),
+
+            const SizedBox(height: 30),
+
+            const Text(
+              "Laps",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+
+            const SizedBox(height: 10),
+
+            Expanded(
+              child: laps.isEmpty
+                  ? const Center(child: Text("No laps recorded"))
+                  : ListView.builder(
+                      itemCount: laps.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: ListTile(
+                            leading: Text("Lap ${index + 1}"),
+                            trailing: Text("${laps[index]} sec"),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -7,3 +7,13 @@ row-vertical-cross_axis
 widget-means a you show on flutter app screen like row,column,textbox etc
 
 rendering-when ever your writing a code and run on mobile that process is called rendering
+
+**splash means graphic window like starting logo app ,animation
+
+**Data storage stack:
+1) Temporary storage
+2) Permanent storage -->1) local storage -> sharedPreferance - sqflite - Hive - moore - GetStorage	
+			2) remote storage
+
+
+**csv means comma separated value
