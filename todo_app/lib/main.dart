@@ -10,8 +10,7 @@ class TodoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: TodoScreen(), debugShowCheckedModeBanner: false,
-     
+    return MaterialApp(home: TodoScreen(), debugShowCheckedModeBanner: false,    
     );
   }
 }
