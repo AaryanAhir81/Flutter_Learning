@@ -2,7 +2,29 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/calculator_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/calculator_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/calculator_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/count_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/count_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/count_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/build" />
+      <excludeFolder url="file://$MODULE_DIR$/demo_application/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/demo_application/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/demo_application/build" />
+      <excludeFolder url="file://$MODULE_DIR$/qll_qpp/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/qll_qpp/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/qll_qpp/build" />
+      <excludeFolder url="file://$MODULE_DIR$/register_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/register_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/register_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/todo_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/todo_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/todo_app/build" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
