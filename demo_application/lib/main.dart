@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:demo_application/controls/sliderexample.dart';
 // import 'package:demo_application/controls/calender.dart';
-import 'package:demo_application/controls/imagedisplay.dart';
+// import 'package:demo_application/controls/imagedisplay.dart';
+import 'package:demo_application/controls/gridview.dart';
 
 void main() {
   runApp(const LoginScreenRun());
@@ -12,6 +13,9 @@ class LoginScreenRun extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(debugShowCheckedModeBanner: false, home: ImgDis());
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: gridDemo(),
+    );
   }
 }
