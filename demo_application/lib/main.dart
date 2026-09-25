@@ -1,6 +1,7 @@
-import 'package:demo_application/controls/PracticeRegister.dart';
 import 'package:flutter/material.dart';
+import 'package:demo_application/controls/formlist.dart';
 
+// import 'package:demo_application/controls/PracticeRegister.dart';
 // import 'package:demo_application/Authentication/login.dart';
 // import 'package:demo_application/controls/sliderexample.dart';
 // import 'package:demo_application/controls/calender.dart';
@@ -19,7 +20,7 @@ class LoginScreenRun extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: RegisterP(),
+      home: formlistExample(),
     );
   }
 }
